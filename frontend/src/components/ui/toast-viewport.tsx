@@ -56,14 +56,17 @@ function ToastItem({ id }: { id: string }) {
 }
 
 export function ToastViewport() {
-  const ids = useShopStore((state) => state.toasts.map((toast) => toast.id));
+  // Select the persisted array itself. Returning a freshly mapped array from a
+  // Zustand selector creates an unstable useSyncExternalStore snapshot in
+  // React 19 and can trigger an infinite render loop during hydration.
+  const toasts = useShopStore((state) => state.toasts);
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-5 z-[100] flex flex-col items-end gap-2 px-4 sm:inset-x-auto sm:right-4">
       <AnimatePresence mode="popLayout">
-        {ids.map((id) => (
-          <div key={id} className="pointer-events-auto">
-            <ToastItem id={id} />
+        {toasts.map((toast) => (
+          <div key={toast.id} className="pointer-events-auto">
+            <ToastItem id={toast.id} />
           </div>
         ))}
       </AnimatePresence>
