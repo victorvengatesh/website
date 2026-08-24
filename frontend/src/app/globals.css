@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand tokens: swap these values to re-theme the entire storefront. */
+  --canvas: 255 249 240;
+  --surface: 255 255 255;
+  --ink: 38 29 24;
+  --muted: 110 98 88;
+  --line: 232 218 202;
+  --brand: 233 83 34;
+  --brand-deep: 144 47 25;
+  --accent: 246 190 65;
+  --success: 31 132 91;
+  --radius-card: 1.75rem;
+  --radius-control: 0.9rem;
+  --shadow-soft: 0 10px 35px rgba(76, 42, 22, 0.08);
+  --shadow-lift: 0 24px 70px rgba(76, 42, 22, 0.16);
+  --shadow-glow: 0 18px 55px rgba(233, 83, 34, 0.25);
+  --gradient-brand: linear-gradient(135deg, #f36c2d 0%, #dc3c22 52%, #7e2918 100%);
+  --gradient-mesh:
+    radial-gradient(circle at 14% 8%, rgba(246, 190, 65, 0.22), transparent 28%),
+    radial-gradient(circle at 87% 18%, rgba(233, 83, 34, 0.16), transparent 26%),
+    linear-gradient(180deg, #fffaf3 0%, #fff6e9 100%);
+}
+
+.dark {
+  --canvas: 22 18 16;
+  --surface: 34 28 25;
+  --ink: 252 244 234;
+  --muted: 185 168 154;
+  --line: 67 54 47;
+  --brand: 245 104 53;
+  --brand-deep: 207 69 34;
+  --accent: 249 199 79;
+  --success: 66 177 126;
+  --shadow-soft: 0 12px 38px rgba(0, 0, 0, 0.2);
+  --shadow-lift: 0 28px 80px rgba(0, 0, 0, 0.36);
+  --shadow-glow: 0 18px 55px rgba(245, 104, 53, 0.22);
+  --gradient-mesh:
+    radial-gradient(circle at 14% 8%, rgba(249, 199, 79, 0.1), transparent 28%),
+    radial-gradient(circle at 87% 18%, rgba(245, 104, 53, 0.13), transparent 26%),
+    linear-gradient(180deg, #171310 0%, #211a17 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+  background: rgb(var(--canvas));
+  color: rgb(var(--ink));
+  font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+  background-image: var(--gradient-mesh);
+}
+
+::selection {
+  background: rgba(233, 83, 34, 0.24);
+  color: rgb(var(--ink));
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgb(var(--brand));
+  outline-offset: 3px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgb(var(--muted) / 0.72);
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-space {
+    @apply py-14 sm:py-20 lg:py-24;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[0.69rem] font-extrabold uppercase tracking-[0.2em] text-brand;
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-extrabold leading-[1.04] tracking-[-0.045em] text-ink sm:text-4xl lg:text-5xl;
+  }
+
+  .field {
+    @apply h-12 w-full rounded-control border border-line bg-surface px-4 text-sm text-ink shadow-sm transition placeholder:text-muted/[.70] hover:border-brand/[.35] focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/[.10];
+  }
+
+  .field-label {
+    @apply mb-2 block text-xs font-bold uppercase tracking-[0.12em] text-muted;
+  }
+
+  .glass-panel {
+    @apply border border-white/[.50] bg-white/[.70] shadow-soft backdrop-blur-xl dark:border-white/[.10] dark:bg-white/[0.055];
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.range-input {
+  appearance: none;
+  height: 5px;
+  border-radius: 999px;
+  background: rgb(var(--line));
+}
+
+.range-input::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  appearance: none;
+  border: 3px solid rgb(var(--surface));
+  border-radius: 999px;
+  background: rgb(var(--brand));
+  box-shadow: 0 2px 10px rgba(233, 83, 34, 0.35);
+}
+
+.range-input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgb(var(--surface));
+  border-radius: 999px;
+  background: rgb(var(--brand));
+  box-shadow: 0 2px 10px rgba(233, 83, 34, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -2,14 +2,21 @@ import uuid
 from datetime import datetime
 from decimal import Decimal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from app.models.order import OrderStatus
 
 
 class OrderItemCreate(BaseModel):
-    product_id: uuid.UUID
+    product_id: uuid.UUID | None = None
+    sku: str | None = Field(default=None, min_length=2, max_length=100)
     quantity: int = Field(gt=0, le=50)
+
+    @model_validator(mode="after")
+    def require_product_reference(self):
+        if self.product_id is None and not self.sku:
+            raise ValueError("Either product_id or sku is required")
+        return self
 
 
 class OrderCreate(BaseModel):

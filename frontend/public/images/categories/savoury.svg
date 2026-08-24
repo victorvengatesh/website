@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Traditional savoury snack bowl</title>
+  <desc id="desc">A premium illustration of a bowl filled with crunchy golden savouries.</desc>
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="20%" r="90%"><stop stop-color="#ffd77b"/><stop offset="1" stop-color="#e9511d"/></radialGradient>
+    <linearGradient id="bowl" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7e7"/><stop offset="1" stop-color="#f2c99b"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#68200d" flood-opacity=".28"/></filter>
+  </defs>
+  <rect width="800" height="800" rx="80" fill="url(#bg)"/>
+  <circle cx="650" cy="145" r="96" fill="#fff" opacity=".12"/><circle cx="105" cy="660" r="150" fill="#6f170c" opacity=".09"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="400" cy="470" rx="272" ry="98" fill="#7f2e18" opacity=".3"/>
+    <path d="M139 380h522c-18 185-117 276-261 276S157 565 139 380Z" fill="url(#bowl)"/>
+    <ellipse cx="400" cy="381" rx="261" ry="102" fill="#4a1f18"/>
+    <ellipse cx="400" cy="370" rx="235" ry="80" fill="#ffbd37"/>
+    <g fill="none" stroke-linecap="round" stroke-width="18">
+      <path d="M242 355c25-40 52 40 81 0s58 39 88-2 61 42 90 2 52 30 69-5" stroke="#d84b18"/>
+      <path d="M210 390c34-44 63 41 98 0s65 39 98-2 69 44 103 1 55 28 79-5" stroke="#f57a1f"/>
+      <path d="M269 330c20-30 43 23 65-5s49 29 70-1 46 27 67 1" stroke="#8e3213"/>
+    </g>
+    <g fill="#7b2b17"><circle cx="246" cy="375" r="10"/><circle cx="345" cy="351" r="9"/><circle cx="456" cy="393" r="11"/><circle cx="546" cy="356" r="8"/></g>
+  </g>
+  <path d="M585 192c41 23 63 57 63 102" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" opacity=".72"/>
+</svg>

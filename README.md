@@ -1,102 +1,159 @@
-# HyperLocal Snack Delivery
+# Namma Bites
 
-A full-stack MVP for a hyper-local snack delivery shop.
+A premium, animation-rich ecommerce experience for a hyperlocal South Indian snack shop. It combines an Amazon-style commerce model—catalog search, filters, product detail, cart, checkout, wishlist, accounts, reviews and order tracking—with a warmer editorial design, interactive 3D, and fast local delivery operations.
 
----
+The customer storefront is built with Next.js, React, TypeScript, Tailwind CSS, Framer Motion, GSAP and React Three Fiber. The existing FastAPI, SQLAlchemy and PostgreSQL-ready backend continues to own inventory, pricing, distance validation and order state transitions.
 
-## 🚀 What We Have Done So Far (Completed Features)
+## What is included
 
-### 💻 Frontend (React + Vite)
-- **Home Page**: Interactive landing page with a loopable, autoplaying hero video background (`hero-snacks.mp4`) and featured snacks display.
-- **Product List & Details**: Browsing capability for snacks by category with clean product detail pages.
-- **Cart Management**: Real-time cart addition, adjustment, and checkout summary powered by React Context.
-- **GPS Location Capture**: Captures the customer's exact coordinates using the browser's Geolocation API on checkout.
-- **Order Checkout**: Form processing customer name, phone, address, pincode, and geographical coordinates.
-- **Order Confirmation & Success**: Redirects users to a dedicated confirmation page containing their tracking ID.
-- **Live Order Tracking**: Customer tracking interface displaying order status updates (Pending, Preparing, Out for Delivery, Delivered) and delivery ETAs.
-- **Admin Dashboard**: Specialized control panel allowing admins to view pending orders, check straight-line delivery distance, accept/reject orders, assign custom ETAs, and update delivery statuses in real-time.
-- **User Interface Utilities**: Integrated responsive toast notifications (success, error) for system actions.
+- Cinematic homepage with a lazy-loaded procedural 3D snack sculpture, GSAP scroll storytelling, category tilt cards, deals countdown, product shelves, FAQ and animated newsletter state.
+- Thirty realistic products across six balanced categories: savouries, chips, sweets, millet, bakery and gifting.
+- Catalog filters for category, price, rating, availability and deals; six sort options; animated grid/list layouts; skeleton loading; and incremental loading.
+- Product pages with a touch-friendly 3D viewer, low-power/reduced-motion image fallback, zoom inspection, variants, sticky buy box, review histogram, Q&A, bundles and recently viewed items.
+- Debounced autocomplete search with highlighted matches, trending suggestions and animated empty states.
+- Persistent Zustand cart, cart drawer, fly-to-cart motion, wishlist, saved-for-later, shipping progress and animated totals.
+- Four-step checkout: Address → Delivery → Payment → Review. It includes inline validation, browser geolocation, payment-provider boundaries and an animated confirmation page.
+- Account UI for sign-in, registration, orders, status timelines, wishlist, addresses and profile preferences.
+- Order tracking and store operations dashboard connected to the FastAPI contract, with safe preview data when an API is not configured.
+- Dark mode, semantic markup, keyboard navigation, focus states, reduced-motion support, metadata, Open Graph, Product structured data, sitemap, robots policy and security headers.
+- Automated frontend checks and backend tests in GitHub Actions.
 
-### ⚙️ Backend (FastAPI + SQLAlchemy)
-- **API Routing**: REST endpoints for managing products, client orders, and admin order updates.
-- **ORM & Database**: Utilizes SQLAlchemy 2.x Async. Equipped to run immediately on **SQLite** for development and configured to connect to **PostgreSQL** for production.
-- **Distance Calculation**: Backend calculations of the delivery distance using the **Haversine formula** (straight-line distance between the customer's GPS coordinates and the shop coordinates).
-- **Auto-Seeding**: Automatic DB seeding with delicious local snacks (like Pipe Fryums, Rose Cookies, Snack Rings, and Special Mixture) on the very first start.
+## Project structure
 
-### 📦 Repository & Infrastructure
-- **Docker Compose**: Container orchestration configured for running PostgreSQL locally.
-- **Git Control**: Fully initialized repository, local config setup, and pushed to GitHub under [victorvengatesh/website](https://github.com/victorvengatesh/website).
+```text
+website/
+├── .github/workflows/ci.yml
+├── backend/
+│   ├── app/
+│   │   ├── api/v1/          # Products, orders and store operations routes
+│   │   ├── core/            # Environment-backed configuration
+│   │   ├── db/              # Async SQLAlchemy session and base
+│   │   ├── models/          # Product, user and order models
+│   │   ├── schemas/         # Pydantic request/response contracts
+│   │   └── services/        # Inventory, distance, pricing and seeding
+│   ├── tests/
+│   └── requirements*.txt
+├── frontend/
+│   ├── public/
+│   │   ├── images/          # Product photography and category artwork
+│   │   └── videos/          # Optimised brand-story video
+│   ├── src/
+│   │   ├── app/             # Next.js App Router pages and metadata
+│   │   ├── components/      # Layout, commerce, UI and 3D primitives
+│   │   ├── config/theme.ts  # Brand copy and commerce settings
+│   │   ├── data/products.ts # Thirty-product mock catalog
+│   │   ├── features/        # Catalog, product, cart, checkout and account flows
+│   │   ├── services/        # Swappable catalog, order and payment adapters
+│   │   ├── store/           # Persistent Zustand state
+│   │   └── types/           # Shared TypeScript contracts
+│   └── package.json
+└── docker-compose.yml       # Optional local PostgreSQL
+```
 
----
+## Quick start
 
-## 🔮 Future Implementations & Roadmap
+Requirements: Node.js 20.9 or newer and Python 3.11 or newer.
 
-Before taking the application into a public production environment, we plan to implement:
+### 1. Start the FastAPI backend
 
-### 🔒 Security & Authentication
-- **User Authentication**: Register/Login endpoints with JWT verification to let customers save addresses, view order history, and manage profiles.
-- **Admin RBAC**: Secure the admin dashboard (`/admin`) with login credentials and Role-Based Access Control (RBAC).
-
-### 📍 Mapping & Geolocation Improvements
-- **Real Road Distance**: Integrate the **Google Maps Distance Matrix API** or **OSRM (Open Source Routing Machine)** to calculate actual road-driving distances rather than straight-line (Haversine) estimates.
-- **Live Tracking Map**: Introduce WebSockets and a Leaflet/Google Map overlay in the tracking screen so clients can watch the delivery rider move in real-time.
-
-### 💳 Payments
-- **Payment Gateway Integration**: Connect popular Indian payment aggregators (e.g., **Razorpay**, **Paytm**, or **UPI intents**) to enable online payment verification before order placement.
-
-### 📣 Notifications
-- **Multi-channel Alerts**: Set up SMS, WhatsApp (via Twilio/Wati), or Push Notifications to keep customers updated on order confirmation, rider dispatch, and delivery.
-
-### ⚙️ Operations & Deployment
-- **Alembic Database Migrations**: Track and version SQLAlchemy model changes.
-- **Inventory Reservation System**: Rules to reserve inventory when checkout starts and automatically release stock if the checkout is abandoned or the order is rejected.
-- **DevOps**: Setup GitHub Actions CI/CD pipelines, production-grade Dockerfiles, Nginx/Caddy configuration with SSL, and rate limiting.
-
----
-
-## 🛠️ Stack Summary
-
-- **Frontend**: React, React Router DOM, Tailwind CSS (or styled layout)
-- **Backend**: FastAPI, Uvicorn
-- **ORM**: SQLAlchemy (Async)
-- **Database**: SQLite (default dev), PostgreSQL (prod ready)
-
----
-
-## 🛠️ Quick Start Setup
-
-### 1. Backend Setup
-Open a terminal in the root directory:
 ```bash
 cd backend
 python -m venv .venv
-```
-- **Windows**:
-  ```bash
-  .venv\Scripts\activate
-  ```
-- **Linux/macOS**:
-  ```bash
-  source .venv/bin/activate
-  ```
-
-Install dependencies and start:
-```bash
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-copy .env.example .env
+cp .env.example .env              # Windows: copy .env.example .env
 uvicorn app.main:app --reload
 ```
-*Note: Make sure to update the shop's default coordinates inside `.env`.*
 
-### 2. Frontend Setup
-Open another terminal:
+The API runs at `http://localhost:8000`; interactive documentation is at `http://localhost:8000/docs`.
+
+SQLite is the default. To use PostgreSQL, start the root `docker-compose.yml` and replace `DATABASE_URL` in `backend/.env` with the corresponding async PostgreSQL URL.
+
+### 2. Start the Next.js storefront
+
 ```bash
 cd frontend
 npm install
+cp .env.example .env.local        # Windows: copy .env.example .env.local
 npm run dev
 ```
 
-Visit:
-- Frontend: [http://localhost:5173](http://localhost:5173)
-- Admin Panel: [http://localhost:5173/admin](http://localhost:5173/admin)
-- API Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+Open `http://localhost:3000`. The operations dashboard is at `/admin`, tracking is at `/track`, and `NB-DEMO142` can be used as a tracking preview.
+
+## Theme, logo and catalog changes
+
+The visual system is intentionally centralised:
+
+1. Change brand name, strapline, support details, currency and font labels in `frontend/src/config/theme.ts`.
+2. Change all light/dark colors, radii, shadows and gradients in the `:root` and `.dark` sections of `frontend/src/app/globals.css`.
+3. Replace the inline mark in `frontend/src/components/layout/logo.tsx`, and update `frontend/src/app/icon.svg`.
+4. Replace catalog records in `frontend/src/data/products.ts`. Keep `sku` values aligned with `backend/app/services/seed_service.py` when real checkout is enabled.
+5. Replace category artwork in `frontend/public/images/categories/` and product media in `frontend/public/images/`.
+
+No page-level color constants are required for a normal rebrand; shared Tailwind tokens resolve to CSS variables.
+
+## Connecting real data
+
+`frontend/src/services/catalog.ts` is the catalog boundary. It currently returns typed mock data and can be replaced with REST or GraphQL calls without changing the page components.
+
+The checkout order adapter in `frontend/src/services/orders.ts` already targets the FastAPI order endpoint. Products are submitted by stable SKU, so it works with both fresh and previously seeded databases.
+
+Set the frontend environment values:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api/v1
+NEXT_PUBLIC_DEMO_CHECKOUT=false
+```
+
+The backend recalculates prices, validates stock, locks selected product rows, calculates the delivery distance, rejects out-of-radius orders and creates an order in `pending_confirmation`. The store then accepts it with an ETA and advances it through preparation, delivery and completion.
+
+## Connecting Stripe or another payment provider
+
+Checkout is intentionally UI-only. Never put a Stripe secret key in a `NEXT_PUBLIC_*` variable.
+
+1. Create a server-only Next.js route handler or FastAPI endpoint that creates a PaymentIntent.
+2. Implement `paymentService.createSession()` in `frontend/src/services/payments.ts` against that server route.
+3. Render Stripe Elements (or the chosen provider SDK) in the Payment step.
+4. Verify provider webhooks on the server and store payment status against the order.
+5. Set `NEXT_PUBLIC_DEMO_CHECKOUT=false` only after real order and payment paths are tested.
+
+The existing disabled card fields are visual placeholders and cannot collect a real payment.
+
+## 3D assets
+
+The current hero and product viewer use lightweight procedural geometry, so no external model download blocks first paint. They are dynamically imported, rendered with capped device pixel ratio and replaced by optimised images on reduced-motion or lower-powered devices.
+
+To add a real product model:
+
+1. Export a Draco-compressed `.glb` and place it under `frontend/public/models/`.
+2. Add its path to the product's `modelUrl`.
+3. Replace the procedural geometry branch in `frontend/src/components/three/product-scene.tsx` with Drei's `useGLTF` loader and preload only the most important models.
+4. Keep the current gallery as the failure and accessibility fallback.
+
+## Quality checks
+
+```bash
+cd frontend
+npm run check
+
+cd ../backend
+pip install -r requirements-dev.txt
+PYTHONPATH=. pytest -q
+python -m compileall -q app
+```
+
+`npm run check` runs ESLint, TypeScript, catalog tests and a full optimised Next.js build. The repository workflow repeats these checks for every pull request and push to `main`.
+
+## Production checklist
+
+Before accepting public traffic:
+
+- Replace the example domain, phone, email, shop coordinates and legal copy.
+- Connect real authentication. Protect `/admin` in both the UI and FastAPI with server-enforced admin RBAC; hiding a route or using `robots.txt` is not security.
+- Connect and verify payments server-side, including webhook signatures, refunds and idempotency.
+- Add database migrations (Alembic), managed PostgreSQL, backups and inventory reconciliation.
+- Put the API behind HTTPS, rate limiting, structured logs and monitoring.
+- Add real allergen statements, product labels, tax rules, cancellation/refund terms and business-specific privacy terms.
+- Test actual devices at 360, 768, 1024 and 1440+ widths and run Lighthouse against the final hosting environment.
+
+The repository is production-quality as a storefront and integration-ready application, but the deliberately mocked authentication and payment providers must be connected before it is treated as a live transactional business.

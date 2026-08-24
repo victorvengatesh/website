@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Indian sweets</title><desc id="desc">Golden laddus arranged on a dark premium serving plate.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffb8a6"/><stop offset=".52" stop-color="#d92b50"/><stop offset="1" stop-color="#741238"/></linearGradient><radialGradient id="laddu"><stop stop-color="#ffd968"/><stop offset="1" stop-color="#e78613"/></radialGradient><filter id="s"><feDropShadow dy="22" stdDeviation="22" flood-opacity=".3"/></filter></defs>
+  <rect width="800" height="800" rx="80" fill="url(#bg)"/><path d="M0 640c190-85 401-79 800 20v140H0Z" fill="#2b0c1c" opacity=".2"/>
+  <g filter="url(#s)"><ellipse cx="400" cy="567" rx="277" ry="90" fill="#260f18"/><ellipse cx="400" cy="536" rx="244" ry="70" fill="#4c1a27"/>
+    <g fill="url(#laddu)"><circle cx="282" cy="453" r="105"/><circle cx="510" cy="447" r="112"/><circle cx="397" cy="328" r="118"/></g>
+    <g fill="#fff0a3" opacity=".7"><circle cx="358" cy="283" r="8"/><circle cx="425" cy="349" r="7"/><circle cx="469" cy="408" r="8"/><circle cx="536" cy="478" r="7"/><circle cx="252" cy="420" r="7"/><circle cx="316" cy="479" r="8"/></g>
+    <g fill="#bc5d14"><circle cx="405" cy="292" r="5"/><circle cx="350" cy="375" r="5"/><circle cx="483" cy="462" r="5"/><circle cx="264" cy="467" r="5"/></g>
+  </g><path d="M155 174c78-40 127-44 187-33" stroke="#fff" stroke-width="12" stroke-linecap="round" fill="none" opacity=".52"/>
+</svg>

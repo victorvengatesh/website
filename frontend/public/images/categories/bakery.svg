@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Bakery biscuits</title><desc id="desc">A stack of artisan cookies on a coral backdrop.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffcfb2"/><stop offset="1" stop-color="#b72b2f"/></linearGradient><linearGradient id="cookie" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe0a1"/><stop offset="1" stop-color="#c76d26"/></linearGradient><filter id="s"><feDropShadow dy="22" stdDeviation="22" flood-color="#541b18" flood-opacity=".3"/></filter></defs>
+  <rect width="800" height="800" rx="80" fill="url(#bg)"/><path d="M60 190c166-100 381-122 679-33" stroke="#fff" stroke-width="13" stroke-linecap="round" fill="none" opacity=".22"/>
+  <g filter="url(#s)" stroke="#a95422" stroke-width="8" fill="url(#cookie)"><ellipse cx="404" cy="533" rx="241" ry="93"/><ellipse cx="392" cy="452" rx="222" ry="89"/><ellipse cx="412" cy="371" rx="205" ry="91"/><circle cx="389" cy="250" r="132"/></g>
+  <g fill="#71321c"><circle cx="342" cy="213" r="13"/><circle cx="424" cy="191" r="11"/><circle cx="450" cy="273" r="14"/><circle cx="365" cy="302" r="10"/><circle cx="354" cy="396" r="9"/><circle cx="483" cy="374" r="11"/><circle cx="310" cy="472" r="9"/><circle cx="454" cy="450" r="10"/></g>
+</svg>
