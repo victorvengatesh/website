@@ -25,9 +25,9 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="HyperLocal Snack Delivery API",
-    description="API for customer ordering and admin order management.",
-    version="1.0.0",
+    title="Namma Bites Commerce API",
+    description="Inventory-safe ordering, distance pricing and store operations for Namma Bites.",
+    version="2.0.0",
     lifespan=lifespan,
 )
 
@@ -48,7 +48,8 @@ app.include_router(
 @app.get("/")
 async def root():
     return {
-        "name": "HyperLocal Snack Delivery API",
+        "name": "Namma Bites Commerce API",
+        "version": "2.0.0",
         "docs": "/docs",
     }
 

@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from uuid import UUID
 
 from fastapi import HTTPException
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
@@ -71,9 +71,11 @@ async def create_order(
             detail="Order must contain at least one item",
         )
 
-    product_ids = [item.product_id for item in payload.items]
+    product_ids = [item.product_id for item in payload.items if item.product_id]
+    product_skus = [item.sku for item in payload.items if item.sku]
+    product_references = [str(item.product_id or item.sku) for item in payload.items]
 
-    if len(product_ids) != len(set(product_ids)):
+    if len(product_references) != len(set(product_references)):
         raise HTTPException(
             status_code=400,
             detail="Duplicate product rows are not allowed",
@@ -100,27 +102,41 @@ async def create_order(
             ),
         )
 
+    product_filters = []
+    if product_ids:
+        product_filters.append(Product.id.in_(product_ids))
+    if product_skus:
+        product_filters.append(Product.sku.in_(product_skus))
+
     result = await db.execute(
         select(Product)
-        .where(Product.id.in_(product_ids))
+        .where(or_(*product_filters))
         .with_for_update()
     )
 
-    products = {
+    products_by_id = {
         product.id: product
         for product in result.scalars().all()
+    }
+    products_by_sku = {
+        product.sku: product
+        for product in products_by_id.values()
     }
 
     subtotal = 0
     order_items = []
 
     for item in payload.items:
-        product = products.get(item.product_id)
+        product = (
+            products_by_id.get(item.product_id)
+            if item.product_id
+            else products_by_sku.get(item.sku)
+        )
 
         if not product:
             raise HTTPException(
                 status_code=404,
-                detail=f"Product {item.product_id} not found",
+                detail=f"Product {item.product_id or item.sku} not found",
             )
 
         if not product.active:
@@ -158,13 +174,6 @@ async def create_order(
 
     delivery_fee = calculate_delivery_fee(distance)
     total = subtotal + delivery_fee
-
-    if customer.wallet_balance < float(total):
-        raise HTTPException(
-            status_code=400,
-            detail=f"Insufficient wallet balance. Total is {total}, but wallet has {customer.wallet_balance}",
-        )
-    customer.wallet_balance -= float(total)
 
     order = Order(
         user_id=customer.id,

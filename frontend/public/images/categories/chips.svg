@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Banana chips</title><desc id="desc">Crisp banana chips floating above a green bowl.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9f383"/><stop offset="1" stop-color="#23875b"/></linearGradient><radialGradient id="chip"><stop stop-color="#fff0a0"/><stop offset="1" stop-color="#e7a921"/></radialGradient><filter id="s"><feDropShadow dy="18" stdDeviation="18" flood-color="#123d2b" flood-opacity=".3"/></filter></defs>
+  <rect width="800" height="800" rx="80" fill="url(#bg)"/><circle cx="668" cy="155" r="120" fill="#fff" opacity=".12"/>
+  <g filter="url(#s)"><path d="M145 426h510c-25 160-113 241-255 241s-230-81-255-241Z" fill="#123e32"/><ellipse cx="400" cy="426" rx="255" ry="84" fill="#1e6547"/>
+    <g fill="url(#chip)" stroke="#cb8d17" stroke-width="8"><ellipse cx="271" cy="386" rx="91" ry="65" transform="rotate(22 271 386)"/><ellipse cx="431" cy="401" rx="99" ry="67" transform="rotate(-14 431 401)"/><ellipse cx="548" cy="364" rx="82" ry="59" transform="rotate(28 548 364)"/></g>
+    <g fill="none" stroke="#f7d959" stroke-width="7"><path d="M207 370c44 2 83 17 119 43"/><path d="M357 418c51-31 98-39 145-23"/><path d="M493 338c41 13 76 31 104 58"/></g>
+  </g>
+  <g fill="url(#chip)" stroke="#cb8d17" stroke-width="7"><ellipse cx="252" cy="207" rx="72" ry="50" transform="rotate(-24 252 207)"/><ellipse cx="481" cy="218" rx="78" ry="52" transform="rotate(18 481 218)"/></g>
+</svg>
